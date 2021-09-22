@@ -20,13 +20,6 @@ export const Shoe = () => {
     }catch(e){
         console.log(e)
     }
-    const gridStyle = {
-        display:'flex',
-        flexWrap:'wrap',
-        rowGap:'3%',
-        borderTop:'5px solid black',
-        padding:window.innerWidth<500?'3% 0 0 23%':'3% 0 0 5%'
-    }
     let data;
     res.length > 0 ? data = res : data = shoe
     const history = useHistory();
@@ -36,20 +29,26 @@ export const Shoe = () => {
     return(
         <>
             <h1 style={{paddingLeft:'5%',fontFamily:'Crimson Text,serif'}}>Shoes</h1>
-            <Grid style={gridStyle}>
+            <Grid style={{
+                display:'flex',
+                flexWrap:'wrap',
+                gap:"50px",
+                justifyContent:'center',
+                borderTop:'5px solid black',
+                paddingTop:'2%'
+            }}>
                {data.map(s=>(
-                   <Grid item xs={12} sm={6} md={4} lg={3} >
+                   <Grid item xs={11} sm={6} md={4} lg={3} xl={3} key={s._id}>
                        <Paper 
-                       style={{
-                           width:'250px',
-                           textAlign:'center',
-                           cursor:'pointer'
-                        }}
-                        onClick={()=>openProduct(s)}
+                       className="products"
+                       elevation={5}
+                       onClick={()=>openProduct(s)}
                        >
-                           <img src ={s.thumbnail} alt="" width="250px" height="250px"/>
+                            <div>
+                                <img alt="" width="300" height="350" src={s.thumbnail}/>
+                            </div>
                             <h4>{s.name}</h4>
-                            <h3>price: {s.price}</h3>
+                            <h4>price: {s.price}</h4>
                        </Paper>
                    </Grid>
                ))}

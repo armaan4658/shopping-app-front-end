@@ -2,7 +2,7 @@ import { useParams } from "react-router"
 import axios from 'axios';
 import { useContext, useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
+import { Grid , Paper} from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 import { FormControl } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
@@ -34,9 +34,7 @@ export const Product = () => {
         console.log(e);
     }
 
-    const gridStyle = {
-        display: window.innerWidth > 500 ? 'flex' : 'grid'
-    }
+
 
     const validationSchema = Yup.object().shape({
         color: Yup.string().required('Choose a color'),
@@ -86,12 +84,18 @@ export const Product = () => {
     }
     return (
         <>
-            <h1>{productData.name}</h1>
-            <Grid style={gridStyle}>
-                <Grid item xs={12} sm={8} md={8} lg={6} xl={6}>
-                    <img alt="" width="100%" height="400px" style={{objectFit:'contain'}} src ={setLoading ? img : 'https://i.stack.imgur.com/ATB3o.gif'}/>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4} lg={6} xl={6}>
+            
+            <Grid className="data">
+                    <h1>{productData.name}</h1>
+                    <Paper elevation={5} style={{
+                    display:'grid',
+                    alignItems:'center',
+                    backgroundColor:'grey',
+                    padding:'15% 0'
+                    }}>
+                        <img alt="" style={{objectFit:'contain'}}  width="355px" height="213px" src ={setLoading ? img : 'https://i.stack.imgur.com/ATB3o.gif'}/>
+                    </Paper>
+                    <h2>Price: Rs{productData.price} </h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {loading ? (
                         <FormControl fullWidth>
@@ -112,42 +116,47 @@ export const Product = () => {
                         {errors.color && (<p>{errors.color.message}</p>)}
                         {loading ? 
                             productData.category==="shoe"?(
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Size</InputLabel>
-                                <Select
-                                  labelId="demo-simple-select-label"
-                                  id="demo-simple-select"
-                                  {...register("size")}
-                                  label="Size"
-                                >
+                            <div style={{marginTop:'2%'}}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Size</InputLabel>
+                                    <Select
+                                      labelId="demo-simple-select-label"
+                                      id="demo-simple-select"
+                                      {...register("size")}
+                                      label="Size"
+                                    >
 
-                                    <MenuItem value=""><em>None</em></MenuItem>
-                                    {productData.description[0]['40']> 0 ? <MenuItem value={40}>
-                                        40
-                                    </MenuItem>:''}
-                                    {productData.description[0]['41']> 0 ? <MenuItem value={41}>
-                                        41
-                                    </MenuItem>:''}
-                                    {productData.description[0]['42']> 0 ? <MenuItem value={42}>
-                                        42
-                                    </MenuItem>:''}
-                                    {productData.description[0]['43']> 0 ? <MenuItem value={43}>
-                                        43
-                                    </MenuItem>:''}
-                                    {productData.description[0]['44']> 0 ? <MenuItem value={44}>
-                                        44
-                                    </MenuItem>:''}
-                                </Select>
-                            </FormControl>) : ''
+                                        <MenuItem value=""><em>None</em></MenuItem>
+                                        {productData.description[0]['40']> 0 ? <MenuItem value={40}>
+                                            40
+                                        </MenuItem>:''}
+                                        {productData.description[0]['41']> 0 ? <MenuItem value={41}>
+                                            41
+                                        </MenuItem>:''}
+                                        {productData.description[0]['42']> 0 ? <MenuItem value={42}>
+                                            42
+                                        </MenuItem>:''}
+                                        {productData.description[0]['43']> 0 ? <MenuItem value={43}>
+                                            43
+                                        </MenuItem>:''}
+                                        {productData.description[0]['44']> 0 ? <MenuItem value={44}>
+                                            44
+                                        </MenuItem>:''}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                                ) : ''
                          : ''}
                         {errors.size && (<p>{errors.size.message}</p>)}
-                        <Button
-                        type="submit"
-                        variant="outlined"
-                        color="primary"
-                        >
-                            Add to cart
-                        </Button>
+                        <div style={{margin:'2% 0'}}>
+                            <Button
+                            type="submit"
+                            variant="outlined"
+                            color="primary"
+                            >
+                                Add to cart
+                            </Button>
+                        </div>
                         {/* <Button
                         variant="outlined"
                         color="primary"
@@ -155,7 +164,6 @@ export const Product = () => {
                             Buy now
                         </Button> */}
                     </form>
-                </Grid>
             </Grid>
         </>
     )

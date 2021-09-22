@@ -53,3 +53,28 @@
     background-color: black;
     color:white;
   }
+
+  .products{
+    display: grid;
+    justify-content: center;
+  }
+  
+  .products h4{
+    text-align: center;
+  }
+  
+  .products:hover{
+    cursor: pointer;
+    background-color: gray;
+  }
+
+  .data{
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .data h2,.data h1{
+    text-align: center;
+    margin: 0;
+  }
