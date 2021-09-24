@@ -29,6 +29,8 @@ function App() {
       if(res.status===200){
           if(res.data.login==="true"){
               setIsLogin(true);
+          }else{
+            setIsLogin(false);
           }
         }
     })
