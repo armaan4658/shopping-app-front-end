@@ -90,6 +90,7 @@ export const Product = () => {
                     <Paper elevation={5} style={{
                     display:'grid',
                     alignItems:'center',
+                    justifyContent:'center',
                     backgroundColor:'grey',
                     padding:'15% 0'
                     }}>
